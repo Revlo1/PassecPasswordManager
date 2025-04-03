@@ -1,5 +1,5 @@
 from dbconnect import usersTable
-from utils import hashPass, passStrengthTester,  generatePass
+from utils import hashPass, passStrengthTester, generatePass
 
 
 #add checks for whether reg details are secure (dont need it for logging in if inputs are sanitized on reg)

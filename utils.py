@@ -4,6 +4,7 @@ from cryptography.fernet import Fernet
 import hashlib 
 import requests
 import random
+import os
 
 #Hashing/Encryption functions==================================================================================
 def hashPass(password):
@@ -20,8 +21,12 @@ genKey()
 '''
 
 def loadKey():
-    with open("secret.key", "rb") as keyFile:
-        return keyFile.read()
+    secretKey = os.getenv("secretKey")
+    if secretKey is None:
+        print("Couldn't find secret key")
+        return None
+    
+    return secretKey
 
 
 key = loadKey()
