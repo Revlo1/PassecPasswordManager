@@ -104,7 +104,7 @@ def genSecCheck(userID):
     for data in dataset:
         plainPass = decryptData(data['serPass'])
         service = data['service']
-        print(f"\n{i}. {service}: {checkPwnedPass(plainPass)}")
+        print(f"\n{i}. Password for {service} '{plainPass}': {checkPwnedPass(plainPass)}")
         print("-Password Flaws-")
         passVal = passStrengthTester(plainPass)
         if passVal:
