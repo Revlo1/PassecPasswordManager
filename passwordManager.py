@@ -1,8 +1,33 @@
 from dbconnect import usersTable, passwordsTable
 from utils import hashPass, checkPass, passStrengthTester, checkPwnedPass, generatePass, checkPwnedEmail, getEmail, encryptData, decryptData
+import time
+import threading
+
+
+loggedIn = True #global loggedIn flag
+logoutTimer = None #initiate global variable
+idleTime = 120 #idle time of 2 minutes
+
+def autoLogout():
+    global loggedIn
+    time.sleep(idleTime)
+    if loggedIn:
+        print("Session timed out due to inactivity")
+        loggedIn = False
+
+def resetTimer():
+    global logoutTimer
+    if logoutTimer and logoutTimer.is_alive():
+        logoutTimer.cancel()
+    logoutTimer = threading.Timer(idleTime, autoLogout)
+    logoutTimer.daemon = True
+    logoutTimer.start()
+    
 
 def passecMain(username, userID):
-    while True:
+    global loggedIn
+    while loggedIn:
+        resetTimer()
         print(f"\n\n\n\nPassec Password Manager - Logged in as {username}, {userID}")
         
         print("\nWhat would you like to do?\n"
@@ -15,6 +40,7 @@ def passecMain(username, userID):
         "\n7. Logout")
         try:
             menuValue = int(input("Input Value Here: "))
+            resetTimer() #idleTimer reset after input
         except ValueError:
             print("Invalid Option")
             continue
@@ -42,9 +68,13 @@ def passecMain(username, userID):
                 #generalSecurityCheckFunction - all passwords for breach and strength check
             case 7:
                 print("Logging out...")
-                break
+                if logoutTimer:
+                    logoutTimer.cancel()
+                loggedIn = False
             case _: #if value is outwith specified options
                 print("Invalid Option")
+
+    return True
 
 def getPass(userID):
     dataset = passwordsTable.find({"userID": userID})

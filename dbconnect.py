@@ -9,14 +9,14 @@ if not uri:
 
 
 
-# Create a new client and connect to the server
+#connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
-db = client["PassecManager"] #Database
+db = client["PassecManager"] #database
 usersTable = db["users"] #users table
 passwordsTable = db["passwords"] #passwords table
 
-# Send a ping to confirm a successful connection
+#test connection
 try:
     client.admin.command('ping')
     #print("Pinged! You have successfully connected to MongoDB!") #used for testing purposes

@@ -4,8 +4,7 @@ from passwordManager import passecMain
 
 #   =-=-=-=-=-=-=-=-=TO DO LIST =-=-=-=-=-=-=-=-=-=
 # Email verification - send out an email to prevent users signing up with emails they dont own
-# Password reset
-# auto logout after set amount of time#
+# Password reset #
 
 passecArt = """
   _____                        __  __                                   
@@ -29,7 +28,7 @@ def main():
             print("Invalid Option")
             continue
 
-        match menuValue: #will have to move stuff when registration screen is setup - email and password check post reg/log
+        match menuValue: 
             case 1:
                 register()
             case 2:
