@@ -1,4 +1,4 @@
-from userAuth import register, login
+from userAuth import register, login, recoverPassword
 from passwordManager import passecMain
 
 
@@ -21,7 +21,7 @@ passecArt = """
 def main():
     print(passecArt)
     while True:
-        print("\nWhat would you like to do?\n1. Register a new account\n2. Login to an existing account\n3. Exit") 
+        print("\nWhat would you like to do?\n1. Register a new account\n2. Login to an existing account\n3. Forgot your password?\n4. Exit") 
         try:
             menuValue = int(input("Input Value Here: "))
         except ValueError:
@@ -36,6 +36,8 @@ def main():
                 if username:
                     passecMain(username, userID)
             case 3:
+                recoverPassword()
+            case 4:
                 print("Exiting...")
                 break
             case _: #if value is outwith specified options
