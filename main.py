@@ -3,8 +3,7 @@ from passwordManager import passecMain
 
 
 #   =-=-=-=-=-=-=-=-=TO DO LIST =-=-=-=-=-=-=-=-=-=
-# Email verification - send out an email to prevent users signing up with emails they dont own
-# Password reset #
+# Cloud Functionality
 
 passecArt = """
   _____                        __  __                                   
